@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('alumnos', AlumnoController::class);
-Route::resource('cursos', CursoController::class);
-Route::resource('docentes', DocenteController::class);
+Route::resource('/alumnos', AlumnoController::class);
+Route::resource('/cursos', CursoController::class);
+Route::resource('/docentes', DocenteController::class);
+
+Route::post('registrar-asistencia', 'AsistenciaController@store');
+
+Route::get('asistencia/{alumno_id}/{curso_id}', 'AsistenciaController@show');
+

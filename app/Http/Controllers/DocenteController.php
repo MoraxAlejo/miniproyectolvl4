@@ -20,7 +20,7 @@ class DocenteController extends Controller
 
     public function store(Request $request)
     {
-        // Validación de datos (puedes personalizar las reglas de validación)
+        
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
@@ -28,7 +28,7 @@ class DocenteController extends Controller
             'especialidad' => 'required|string',
         ]);
 
-        // Crear un nuevo docente en la base de datos
+       
         Docente::create($request->all());
 
         return redirect()->route('docentes.index')->with('success', 'Docente creado exitosamente');
@@ -46,7 +46,7 @@ class DocenteController extends Controller
 
     public function update(Request $request, Docente $docente)
     {
-        // Validación de datos (puedes personalizar las reglas de validación)
+        
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
@@ -54,7 +54,7 @@ class DocenteController extends Controller
             'especialidad' => 'required|string',
         ]);
 
-        // Actualizar el docente en la base de datos
+        
         $docente->update($request->all());
 
         return redirect()->route('docentes.index')->with('success', 'Docente actualizado exitosamente');
@@ -62,7 +62,7 @@ class DocenteController extends Controller
 
     public function destroy(Docente $docente)
     {
-        // Eliminar el docente de la base de datos
+        
         $docente->delete();
 
         return redirect()->route('docentes.index')->with('success', 'Docente eliminado exitosamente');

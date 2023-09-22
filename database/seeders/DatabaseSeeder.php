@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Curso;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CursosTableSeeder::class);
+        $this->call(AlumnosTableSeeder::class);
+        $this->call(DocentesTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

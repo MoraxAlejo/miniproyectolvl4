@@ -9,8 +9,9 @@ class AlumnoController extends Controller
 {
     public function index()
     {
-        $alumnos = Alumno::all();
-        return view('alumnos.index', compact('alumnos'));
+        $alumnos = new Alumno();
+        return $alumnos->all();
+
     }
 
     public function create()
@@ -20,23 +21,20 @@ class AlumnoController extends Controller
 
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'correo_electronico' => 'required|string|email|unique:alumnos',
-            // Agrega aquí las reglas de validación para otros campos
-        ]);
-
-        // Crear un nuevo alumno en la base de datos
-        Alumno::create($request->all());
-
-        return redirect()->route('alumnos.index')->with('success', 'Alumno creado exitosamente');
+        $alumnos = new Alumno();
+        $alumnos->nombre = $request->nombre;
+        $alumnos->apellido = $request->apellido;
+        $alumnos->correo_electronico = $request->correo_electronico;
+        $alumnos->asistio = $request->asistio;
+        $alumnos->save();
+        return $alumnos;
     }
 
-    public function show(Alumno $alumno)
+    public function show($id)
     {
-        return view('alumnos.show', compact('alumno'));
+        $alumnos = new Alumno();
+        return $alumnos->find($id);
+
     }
 
     public function edit(Alumno $alumno)
