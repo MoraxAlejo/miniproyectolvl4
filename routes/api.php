@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\AlumnoCursoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DocenteController;
+use App\Models\AlumnoCurso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +46,11 @@ Route::controller(AlumnoController::class)->group(function() {
     Route::put('/cursos/{id}', 'edit');
     Route::delete('/cursos/{id}', 'destroy');
  });
+
+ Route::controller(AlumnoCursoController::class)->group(function() {
+   Route::get('/matriculas', 'index');
+   Route::get('/matriculas/{id}', 'show');
+   Route::post('/matriculas', 'store');
+   Route::put('/matriculas/{id}', 'edit');
+   Route::delete('/matriculas/{id}', 'destroy');
+});
