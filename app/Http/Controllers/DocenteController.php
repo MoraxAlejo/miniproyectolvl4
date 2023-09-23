@@ -9,8 +9,8 @@ class DocenteController extends Controller
 {
     public function index()
     {
-        $docentes = Docente::all();
-        return view('docentes.index', compact('docentes'));
+        $docente = new Docente();
+        return $docente->all();
     }
 
     public function create()
@@ -20,28 +20,28 @@ class DocenteController extends Controller
 
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'correo_electronico' => 'required|string|email|unique:docentes',
-            'especialidad' => 'required|string',
-        ]);
-
-       
-        Docente::create($request->all());
-
-        return redirect()->route('docentes.index')->with('success', 'Docente creado exitosamente');
+        $docente = new docente();
+        $docente->nombre = $request->nombre;
+        $docente->apellido = $request->apellido;
+        $docente->correo_electronico = $request->correo_electronico;
+        $docente->save();
+        return $docente;
     }
 
-    public function show(Docente $docente)
+    public function show($id)
     {
-        return view('docentes.show', compact('docente'));
+        $docente = new Docente();
+        return $docente->find($id);
     }
 
-    public function edit(Docente $docente)
+    public function edit($id, Request $request)
     {
-        return view('docentes.edit', compact('docente'));
+        $docente = Docente::find($id);
+        $docente->nombre = $request->nombre;
+        $docente->apellido = $request->apellido;
+        $docente->correo_electronico = $request->correo_electronico;
+        $docente->save();
+        return $docente;
     }
 
     public function update(Request $request, Docente $docente)
@@ -60,12 +60,11 @@ class DocenteController extends Controller
         return redirect()->route('docentes.index')->with('success', 'Docente actualizado exitosamente');
     }
 
-    public function destroy(Docente $docente)
+    public function destroy($id)
     {
-        
+        $docente = Docente::find($id);
         $docente->delete();
-
-        return redirect()->route('docentes.index')->with('success', 'Docente eliminado exitosamente');
+        return $docente->all();
     }
 }
 

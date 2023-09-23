@@ -15,7 +15,6 @@ class DocenteFactory extends Factory
             'nombre' => $this->faker->firstName(),
             'apellido' => $this->faker->lastName(),
             'correo_electronico' => $this->faker->unique()->safeEmail(),
-            'especialidad' => $this->faker->word(),
             
         ];
     }

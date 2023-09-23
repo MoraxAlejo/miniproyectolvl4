@@ -37,30 +37,25 @@ class AlumnoController extends Controller
 
     }
 
-    public function edit(Alumno $alumno)
+    public function edit($id, Request $request)
     {
-        return view('alumnos.edit', compact('alumno'));
+        $alumnos = Alumno::find($id);
+        $alumnos->nombre = $request->nombre;
+        $alumnos->apellido = $request->apellido;
+        $alumnos->correo_electronico = $request->correo_electronico;
+        $alumnos->asistio = $request->asistio;
+        $alumnos->save();
+        return $alumnos;
     }
 
     public function update(Request $request, Alumno $alumno)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'correo_electronico' => 'required|string|email|unique:alumnos,correo_electronico,' . $alumno->id,
-        ]);
-
-       
-        $alumno->update($request->all());
-
-        return redirect()->route('alumnos.index')->with('success', 'Alumno actualizado exitosamente');
+        
     }
 
-    public function destroy(Alumno $alumno)
-    {
-       
-        $alumno->delete();
-
-        return redirect()->route('alumnos.index')->with('success', 'Alumno eliminado exitosamente');
+    public function destroy($id){
+        $alumnos = Alumno::find($id);
+        $alumnos->delete();
+        return $alumnos->all();
     }
 }

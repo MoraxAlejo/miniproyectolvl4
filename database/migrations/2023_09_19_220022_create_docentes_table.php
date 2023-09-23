@@ -13,7 +13,6 @@ class CreateDocentesTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('correo_electronico')->unique();
-            $table->string('especialidad');
             
 
             $table->timestamps();
